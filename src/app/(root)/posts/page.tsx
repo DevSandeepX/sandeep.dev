@@ -1,10 +1,9 @@
+export const dynamic = "force-dynamic"
+
+
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
-import PostCard from "@/components/PostCard";
 import PostCardSkeleton from "@/components/PostCardSkelton";
 import { PostGrid } from "@/components/PostGrid";
-import { posts } from "@/database/schema";
-import { db } from "@/lib/db";
-import { asc } from "drizzle-orm";
 import { Suspense } from "react";
 
 

@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"
 import PostCardSkeleton from "@/components/PostCardSkelton";
 import { PostGrid } from "@/components/PostGrid";
 import { posts } from "@/database/schema";
@@ -8,7 +9,7 @@ import { Suspense } from "react";
 export async function FeaturedPosts() {
     const featuredPosts = await db.query.posts.findMany({
         orderBy: asc(posts.createdAt),
-        where:eq(posts.status ,"published"),
+        where: eq(posts.status, "published"),
         limit: 6
     })
 

@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { posts } from "@/database/schema"
 import { db } from "@/lib/db"
 import { and, eq } from "drizzle-orm"

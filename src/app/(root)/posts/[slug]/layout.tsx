@@ -1,3 +1,6 @@
+export const dynamic = "force-dynamic"
+
+
 import { CommentForm } from "@/components/CommentForm"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper"
 import { comments, posts } from "@/database/schema"

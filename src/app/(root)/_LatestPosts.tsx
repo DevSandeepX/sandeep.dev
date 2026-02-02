@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import PostCardSkeleton from "@/components/PostCardSkelton";
 import { PostGrid } from "@/components/PostGrid";
 import { posts } from "@/database/schema";
