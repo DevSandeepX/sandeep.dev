@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Image from "next/image";
 import { FeaturedPosts } from "./_FeaturedPosts";
