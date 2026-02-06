@@ -1,0 +1,3 @@
+interface UserPublicMetadata {
+    role?: string
+}

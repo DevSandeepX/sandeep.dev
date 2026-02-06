@@ -4,6 +4,7 @@ import { z } from "zod"
 import slugify from "slugify"
 import { postSchema } from "./schemas"
 import { deletePostDb, insertPostDb, updatePostDb } from "./db"
+import { revalidatePath } from "next/cache"
 
 function generateSlug(title: string) {
     return slugify(title, {
@@ -33,6 +34,9 @@ export async function createPost(
             slug: generateSlug(parsed.data.title),
         })
 
+        revalidatePath("/posts")
+        revalidatePath("/admin/blogs")
+
         return {
             success: true,
             message: "Successfully created your post",
@@ -57,9 +61,9 @@ export async function deletePost(
 
     try {
         // 2️⃣ Insert
-        const post = await deletePostDb(
-            id)
-
+        const post = await deletePostDb(id)
+        revalidatePath("/posts")
+        revalidatePath("/admin/blogs")
         return {
             success: true,
             data: post,
@@ -97,6 +101,10 @@ export async function updatePost(
                 slug: generateSlug(parsed.data.title),
             }
         })
+
+        revalidatePath("/posts")
+        revalidatePath("/admin/blogs")
+        revalidatePath(`/posts/${post.id}`)
 
         return {
             success: true,

@@ -1,23 +1,23 @@
 "use client"
 
-import { PlusIcon } from "lucide-react";
-import SearchForm from "../shared/SearchForm";
-import { Button } from "../ui/button";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
+import { ReactNode } from "react";
 
-export default function PageHeader() {
-
-    const pathname = usePathname();
+export default function PageHeader({
+    title,
+    children,
+}: {
+    title: string
+    children?: ReactNode
+}) {
     return (
-        <main className="flex gap-6 justify-end items-center py-2">
-            <SearchForm />
-            <Button variant="outline">
-                <Link href={`${pathname}/new`} className="flex gap-2 items-center">
-                    <PlusIcon />
-                    <p>New</p>
-                </Link>
-            </Button>
-        </main>
+        <header className="flex items-center justify-between py-4 border-b w-full">
+            <h2 className="text-2xl font-semibold text-muted-foreground">{title}</h2>
+
+            {children && (
+                <div className="flex items-center gap-2">
+                    {children}
+                </div>
+            )}
+        </header>
     )
 }

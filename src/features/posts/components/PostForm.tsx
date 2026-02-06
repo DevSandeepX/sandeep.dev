@@ -18,17 +18,17 @@ export function PostForm({ post }: {
         id: string,
         title: string
         status: (typeof postStatuses)[number]
-        image: string
-        description: string
+        image: string | null
+        description: string | null
     }
 }) {
     const form = useForm<z.infer<typeof postSchema>>({
         resolver: zodResolver(postSchema),
         defaultValues: {
-            description: "",
-            image: "",
-            title: "",
-            status: "draft",
+            description: post?.description ?? "",
+            image: post?.image ?? "",
+            title: post?.title ?? "",
+            status: post?.status ?? "draft",
         }
     })
 

@@ -1,6 +1,3 @@
-export const dynamic = "force-dynamic"
-
-
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import PostCardSkeleton from "@/components/PostCardSkelton";
 import { PostGrid } from "@/components/PostGrid";

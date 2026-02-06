@@ -3,6 +3,7 @@ import { WebhookEvent } from "@clerk/nextjs/server"
 import { headers } from "next/headers"
 import { Webhook } from "svix"
 import { deleteUserDb, insertUser, updateUser } from "@/features/users/db"
+import { revalidatePath } from "next/cache"
 const CLERK_WEBHOOK_SECRET = process.env.CLERK_WEBHOOK_SECRET || ""
 
 export async function POST(req: Request) {
@@ -51,19 +52,23 @@ export async function POST(req: Request) {
                     id: event.data.id,
                     email,
                     name,
+                    image: event.data.image_url,
                     createdAt: new Date(event.data.created_at),
                     updatedAt: new Date(event.data.updated_at)
                 })
-
+                
             } else {
                 await updateUser(
                     event.data.id,
                     {
                         email,
                         name,
+                        image: event.data.image_url
                     }
                 )
             }
+
+            revalidatePath("/admin/users")
             break
         }
         case "user.deleted": {

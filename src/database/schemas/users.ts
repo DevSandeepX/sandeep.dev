@@ -14,6 +14,7 @@ import { ratings } from "./ratings";
 export const users = pgTable('users', {
     id: varchar('id').notNull().unique().primaryKey(),
     name: varchar('name').notNull(),
+    image: varchar('image').notNull(),
     email: varchar('email').unique().notNull(),
     createdAt,
     updatedAt
