@@ -1,10 +1,10 @@
 import PageHeader from "@/components/admin/PageHeader";
 import BlogsTable from "@/components/admin/table/BlogsTable";
-import SearchForm from "@/components/shared/SearchForm";
 import { Button } from "@/components/ui/button";
 import { db } from "@/lib/db";
 import { PlusIcon } from "lucide-react";
 import Link from "next/link";
+import { Suspense } from "react";
 
 export default async function Page() {
     const blogs = await db.query.posts.findMany({})
@@ -12,7 +12,7 @@ export default async function Page() {
         <section>
             <PageHeader title="All Posts">
                 <div className="flex items-start gap-6">
-                    <SearchForm />
+
                     <Button asChild>
                         <Link href={`/admin/blogs/new`}>
                             <PlusIcon /> New Post
@@ -21,7 +21,9 @@ export default async function Page() {
                 </div>
             </PageHeader>
 
-            <BlogsTable blogs={blogs} />
+            <Suspense fallback={<h2>Loading...</h2>}>
+                <BlogsTable blogs={blogs} />
+            </Suspense>
         </section>
     )
 }

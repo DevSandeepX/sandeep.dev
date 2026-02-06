@@ -4,7 +4,7 @@ import PostCardSkeleton from "@/components/PostCardSkelton";
 import { PostGrid } from "@/components/PostGrid";
 import { posts } from "@/database/schema";
 import { db } from "@/lib/db";
-import { asc, desc, eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { Suspense } from "react";
 
 export async function LatestPosts() {
