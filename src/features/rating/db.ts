@@ -20,3 +20,9 @@ export async function insertRatingDb(data: typeof ratings.$inferInsert) {
         return response
     }
 }
+
+export async function deleteRatingDb(id: string) {
+    const [response] = await db.delete(ratings).where(eq(ratings.id, id)).returning()
+    return response
+
+}

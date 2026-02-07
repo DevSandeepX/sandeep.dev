@@ -5,6 +5,7 @@ import slugify from "slugify"
 import { postSchema } from "./schemas"
 import { deletePostDb, insertPostDb, updatePostDb } from "./db"
 import { revalidatePath } from "next/cache"
+import { createMarkdown } from "../markdowns/actions"
 
 function generateSlug(title: string) {
     return slugify(title, {
@@ -34,8 +35,14 @@ export async function createPost(
             slug: generateSlug(parsed.data.title),
         })
 
+        await createMarkdown({
+            postId: post.id,
+            content: ""
+        })
         revalidatePath("/posts")
         revalidatePath("/admin/blogs")
+        revalidatePath("/admin/markdowns")
+        revalidatePath(`posts/${post.slug}`)
 
         return {
             success: true,

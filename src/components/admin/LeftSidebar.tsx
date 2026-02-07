@@ -52,12 +52,12 @@ export default function LeftSidebar() {
                     const regex = new RegExp(`^${route}(/|$)`)
                     const isActive = regex.test(pathname)
 
-                    return <Link key={route} href={route} className={cn(
+                    return <Link title={name} key={route} href={route} className={cn(
                         "flex w-full items-center gap-4 text-[14px] py-2 px-4 sm:pr-8 md:pr-10 lg:pr-16",
                         isActive && "bg-blue-600 text-blue-100 font-medium",
                         !isActive && "hover:bg-zinc-200"
                     )}>
-                        <Icon /> <p className="hidden sm:block">{name}</p>
+                        <Icon /> <p className="hidden md:block">{name}</p>
                     </Link>
                 }
 

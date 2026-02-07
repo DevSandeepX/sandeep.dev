@@ -40,8 +40,8 @@ export default function BlogsTable({ blogs }: {
                                 />
                             </div>
                         </TableCell>
-                        <TableCell>
-                            {blog.title.slice(1, 20)}...
+                        <TableCell className='line-clamp-1'>
+                            {blog.title}
                         </TableCell>
                         <TableCell className='hidden sm:table-cell'>
                             {blog.createdAt?.toLocaleDateString()}

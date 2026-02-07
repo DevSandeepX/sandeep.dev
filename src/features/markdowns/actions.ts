@@ -17,6 +17,7 @@ export async function createMarkdown(unsafeData: z.infer<typeof markdownSchema>)
         const markdown = await insertMarkdownDb(data)
         revalidatePath(`/admin/markdowns`)
         revalidatePath(`/admin/blogs/${markdown.postId}/markdowns`)
+        revalidatePath(`/admin/blogs/${markdown.postId}/markdowns/new`)
         return { success: true, message: "Markdown successfully created" }
     } catch (e) {
         return { success: false, message: "Failed to create markdown" }
@@ -37,6 +38,7 @@ export async function updateMarkdown(id: string, unsafeData: z.infer<typeof mark
         revalidatePath(`/admin/markdowns`)
         revalidatePath(`/admin/blogs/${markdown.postId}/markdowns`)
         revalidatePath(`/admin/blogs/${markdown.postId}/markdowns/${markdown.id}`)
+        revalidatePath(`/admin/blogs/${markdown.postId}/markdowns/new`)
 
         return { success: true, message: "Markdown successfully updated" }
     } catch (e) {
@@ -54,7 +56,7 @@ export async function deleteMarkdown(id: string) {
         const markdown = await deleteMarkdownDb(id)
         revalidatePath(`/admin/markdowns`)
         revalidatePath(`/admin/blogs/${markdown.postId}/markdowns`)
-        revalidatePath(`/admin/blogs/${markdown.postId}/markdowns/${markdown.id}`)
+        revalidatePath(`/admin/blogs/${markdown.postId}/markdowns/new`)
 
         return { success: true, message: "Markdown successfully deleted" }
     } catch (e) {

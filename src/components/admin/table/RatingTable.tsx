@@ -1,16 +1,16 @@
 import { ActionButton } from '@/components/shared/ActionButton';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Trash2Icon } from 'lucide-react';
-import { deleteComments } from '../action';
 import { Skeleton } from "@/components/ui/skeleton"
+import { deleteRatings } from '@/features/rating/actions';
 type Props = {
     data: {
         id: string;
         username: string;
-        message: string;
+        rating: number;
     }[]
 }
-export function CommentTable({ data }: Props) {
+export function RatingTable({ data }: Props) {
     if (data.length == 0 || !data) {
         return (
             <div>No Comment Aviable</div>
@@ -22,17 +22,17 @@ export function CommentTable({ data }: Props) {
             <TableHeader>
                 <TableRow>
                     <TableHead>Username</TableHead>
-                    <TableHead>Message</TableHead>
+                    <TableHead>Ratings</TableHead>
                     <TableHead>Action</TableHead>
                 </TableRow>
             </TableHeader>
             <TableBody>
-                {data.map(({ id, username, message }) => (
+                {data.map(({ id, username, rating }) => (
                     <TableRow key={id}>
                         <TableCell>{username}</TableCell>
-                        <TableCell className='line-clamp-1'>{message}</TableCell>
+                        <TableCell className='line-clamp-1'>{rating}</TableCell>
                         <TableCell>
-                            <ActionButton variant="outline" requireAreYouSure action={deleteComments.bind(null, id)}>
+                            <ActionButton variant="outline" requireAreYouSure action={deleteRatings.bind(null, id)}>
                                 <Trash2Icon className='text-red-400' />
                             </ActionButton>
                         </TableCell>

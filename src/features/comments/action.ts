@@ -3,6 +3,7 @@
 import z from "zod";
 import { commentSchema } from "./schemas";
 import { deleteCommentDb, insertCommentDb } from "./db";
+import { revalidatePath } from "next/cache";
 
 export async function createComment(unsafeData: z.infer<typeof commentSchema>) {
     const { success, data } = commentSchema.safeParse(unsafeData)
@@ -33,6 +34,8 @@ export async function deleteComments(id: string) {
 
     try {
         const response = await deleteCommentDb(id)
+        revalidatePath("/admin/comments")
+
         return {
             success: true,
             message: "Comment successfully deleted"
