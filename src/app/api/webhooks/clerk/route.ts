@@ -56,7 +56,10 @@ export async function POST(req: Request) {
                     createdAt: new Date(event.data.created_at),
                     updatedAt: new Date(event.data.updated_at)
                 })
-                
+
+                revalidatePath("/admin/users")
+                revalidatePath("/admin")
+
             } else {
                 await updateUser(
                     event.data.id,
@@ -66,14 +69,17 @@ export async function POST(req: Request) {
                         image: event.data.image_url
                     }
                 )
+                revalidatePath("/admin/users")
+                revalidatePath("/admin")
             }
 
-            revalidatePath("/admin/users")
             break
         }
         case "user.deleted": {
             if (event.data.id != null) {
                 await deleteUserDb({ id: event.data.id })
+                revalidatePath("/admin/users")
+                revalidatePath("/admin")
             }
             break
         }

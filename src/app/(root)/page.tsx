@@ -1,8 +1,10 @@
 export const dynamic = "force-dynamic"
+
 import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 import Image from "next/image";
 import { FeaturedPosts } from "./_FeaturedPosts";
 import { LatestPosts } from "./_LatestPosts";
+import Testimonials from "@/components/Testimonials";
 
 const Home = () => {
   return (
@@ -27,6 +29,7 @@ const Home = () => {
       </section>
       <FeaturedPosts />
       <LatestPosts />
+      <Testimonials />
 
     </MaxWidthWrapper >
   )

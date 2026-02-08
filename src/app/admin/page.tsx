@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"
 import PostChartWrapper from "@/components/admin/charts/PostChartWrapper";
 import UserChartWrapper from "@/components/admin/charts/UserChartWrapper";
 import { OverviewGrid } from "@/components/admin/OverviewGrid";

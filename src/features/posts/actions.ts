@@ -1,11 +1,14 @@
 "use server"
 
-import { z } from "zod"
+import { string, z } from "zod"
 import slugify from "slugify"
 import { postSchema } from "./schemas"
 import { deletePostDb, insertPostDb, updatePostDb } from "./db"
 import { revalidatePath } from "next/cache"
 import { createMarkdown } from "../markdowns/actions"
+import { db } from "@/lib/db"
+import { and, desc, eq, ilike } from "drizzle-orm"
+import { posts } from "@/database/schema"
 
 function generateSlug(title: string) {
     return slugify(title, {
@@ -127,4 +130,26 @@ export async function updatePost(
                     : "Failed to update post",
         }
     }
+}
+
+
+
+// get actions
+
+const PAGE_PER_ITEM = 6
+export async function fetchPostList({ page, query }: { page: number, query?: string }) {
+    const conditions = [eq(posts.status, "published")]
+    if (query?.trim) {
+        conditions.push(ilike(posts.title, `%${query}%`))
+    }
+
+    const res = await db.query.posts.findMany({
+        columns: { slug: true, title: true },
+        where: and(...conditions),
+        limit: PAGE_PER_ITEM,
+        offset: (page - 1) * PAGE_PER_ITEM,
+        orderBy: (posts, { desc }) => desc(posts.createdAt)
+    })
+
+    return res
 }

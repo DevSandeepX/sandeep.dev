@@ -76,12 +76,8 @@ export const metadata: Metadata = {
     },
 }
 
-
-
-
-
 const Page = async () => {
-    const allBlogs = await fetchPosts(1, 6)
+    const allBlogs = await fetchPosts(1)
     return (
         <MaxWidthWrapper>
             <Suspense fallback={

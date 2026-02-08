@@ -1,3 +1,5 @@
+export const dynamic = "force-dynamic"
+
 import { comments, markdowns, posts, users } from "@/database/schema"
 import { db } from "@/lib/db"
 import { sql } from "drizzle-orm"
